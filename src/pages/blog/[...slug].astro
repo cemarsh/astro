@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Astro Exploration`} description={post.data.description}>
+	<article class="prose prose-invert max-w-none">
+		<div class="mb-8">
+			<a href="/blog" class="text-purple-400 hover:text-purple-300">← Back to Blog</a>
+		</div>
+
+		<header class="mb-8 border-b border-slate-700 pb-8">
+			<h1 class="mb-4 text-3xl font-bold text-white">{post.data.title}</h1>
+			<p class="mb-4 text-lg text-slate-300">{post.data.description}</p>
+			<div class="flex items-center gap-4 text-sm text-slate-400">
+				<time datetime={post.data.pubDate.toISOString()}>
+					{post.data.pubDate.toLocaleDateString('en-US', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+					})}
+				</time>
+				<span>•</span>
+				<span>{post.data.author}</span>
+			</div>
+			<div class="mt-4 flex flex-wrap gap-2">
+				{post.data.tags.map((tag) => (
+					<span class="rounded bg-purple-500/20 px-2 py-1 text-xs text-purple-300">{tag}</span>
+				))}
+			</div>
+		</header>
+
+		<div class="prose-headings:text-white prose-p:text-slate-300 prose-a:text-purple-400 prose-strong:text-white prose-code:text-purple-300 prose-pre:bg-slate-800 prose-pre:border prose-pre:border-slate-700 prose-li:text-slate-300">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	article :global(h1) { font-size: 1.5rem; font-weight: 700; color: white; margin-top: 2rem; margin-bottom: 1rem; }
+	article :global(h2) { font-size: 1.25rem; font-weight: 700; color: white; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+	article :global(h3) { font-size: 1.125rem; font-weight: 700; color: white; margin-top: 1rem; margin-bottom: 0.5rem; }
+	article :global(p) { color: #cbd5e1; margin-bottom: 1rem; line-height: 1.625; }
+	article :global(ul) { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #cbd5e1; }
+	article :global(ol) { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1rem; color: #cbd5e1; }
+	article :global(li) { margin-bottom: 0.5rem; }
+	article :global(code) { background-color: #1e293b; padding: 0.125rem 0.375rem; border-radius: 0.25rem; color: #d8b4fe; font-size: 0.875rem; }
+	article :global(pre) { background-color: #1e293b; padding: 1rem; border-radius: 0.5rem; border: 1px solid #334155; overflow-x: auto; margin-bottom: 1rem; }
+	article :global(pre code) { background-color: transparent; padding: 0; }
+	article :global(blockquote) { border-left: 4px solid #a855f7; padding-left: 1rem; font-style: italic; color: #94a3b8; }
+	article :global(table) { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+	article :global(th) { border: 1px solid #334155; background-color: #1e293b; padding: 0.5rem 1rem; text-align: left; color: white; }
+	article :global(td) { border: 1px solid #334155; padding: 0.5rem 1rem; color: #cbd5e1; }
+</style>

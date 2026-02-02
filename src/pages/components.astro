@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ReactCounter from '../components/react/Counter';
+import VueCounter from '../components/vue/Counter.vue';
+import SvelteCounter from '../components/svelte/Counter.svelte';
+---
+
+<Layout title="Components | Astro Exploration">
+	<h1 class="mb-2 text-3xl font-bold text-white">Multi-Framework Components</h1>
+	<p class="mb-8 text-slate-400">
+		Interactive counters built with React, Vue, and Svelte - all on the same page!
+		Each component uses <code class="rounded bg-slate-800 px-1.5 py-0.5 text-purple-300">client:visible</code>
+		to hydrate only when scrolled into view.
+	</p>
+
+	<div class="mb-8 rounded-lg border border-yellow-500/50 bg-yellow-500/10 p-4">
+		<p class="text-sm text-yellow-200">
+			<strong>Islands Architecture Demo:</strong> These components are JavaScript "islands" in a sea of static HTML.
+			They only load their framework code when they become visible in the viewport.
+		</p>
+	</div>
+
+	<div class="grid gap-8">
+		<section>
+			<h2 class="mb-4 text-xl font-bold text-blue-400">React Component</h2>
+			<p class="mb-4 text-slate-400">
+				Built with React 19 and the <code class="rounded bg-slate-800 px-1.5 py-0.5 text-purple-300">useState</code> hook.
+			</p>
+			<ReactCounter client:visible />
+		</section>
+
+		<section>
+			<h2 class="mb-4 text-xl font-bold text-green-400">Vue Component</h2>
+			<p class="mb-4 text-slate-400">
+				Built with Vue 3 and the Composition API using <code class="rounded bg-slate-800 px-1.5 py-0.5 text-purple-300">ref()</code>.
+			</p>
+			<VueCounter client:visible />
+		</section>
+
+		<section>
+			<h2 class="mb-4 text-xl font-bold text-orange-400">Svelte Component</h2>
+			<p class="mb-4 text-slate-400">
+				Built with Svelte 5 using the new <code class="rounded bg-slate-800 px-1.5 py-0.5 text-purple-300">$state</code> rune.
+			</p>
+			<SvelteCounter client:visible />
+		</section>
+	</div>
+
+	<section class="mt-12 rounded-lg border border-slate-700 bg-slate-800 p-6">
+		<h2 class="mb-4 text-xl font-bold text-white">Client Directives Reference</h2>
+		<div class="overflow-x-auto">
+			<table class="w-full text-sm">
+				<thead>
+					<tr class="border-b border-slate-700">
+						<th class="py-2 text-left text-slate-300">Directive</th>
+						<th class="py-2 text-left text-slate-300">When it Hydrates</th>
+						<th class="py-2 text-left text-slate-300">Use Case</th>
+					</tr>
+				</thead>
+				<tbody class="text-slate-400">
+					<tr class="border-b border-slate-700">
+						<td class="py-2"><code class="text-purple-300">client:load</code></td>
+						<td class="py-2">Immediately on page load</td>
+						<td class="py-2">Critical interactive elements</td>
+					</tr>
+					<tr class="border-b border-slate-700">
+						<td class="py-2"><code class="text-purple-300">client:idle</code></td>
+						<td class="py-2">When browser is idle</td>
+						<td class="py-2">Lower priority components</td>
+					</tr>
+					<tr class="border-b border-slate-700">
+						<td class="py-2"><code class="text-purple-300">client:visible</code></td>
+						<td class="py-2">When scrolled into viewport</td>
+						<td class="py-2">Below-the-fold content</td>
+					</tr>
+					<tr class="border-b border-slate-700">
+						<td class="py-2"><code class="text-purple-300">client:media</code></td>
+						<td class="py-2">When media query matches</td>
+						<td class="py-2">Responsive components</td>
+					</tr>
+					<tr>
+						<td class="py-2"><code class="text-purple-300">client:only</code></td>
+						<td class="py-2">Client-side only (no SSR)</td>
+						<td class="py-2">Browser-only APIs</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</Layout>
