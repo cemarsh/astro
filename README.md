@@ -2,20 +2,22 @@
 
 An immersive showcase demonstrating Astro's revolutionary approach to web development. Experience Islands Architecture, multi-framework support, and zero-JS-by-default in action.
 
+**Live Site:** https://astro-lab-dyu.pages.dev
+
 ## Live Demo
 
 Visit the showcase pages to see Astro's features in action:
 
 | Page | Description |
 |------|-------------|
-| `/evolution` | Interactive timeline through web development eras |
-| `/playground` | Islands Architecture with all hydration strategies |
-| `/state-sharing` | React, Vue, and Svelte sharing state via Nano Stores |
-| `/transitions` | View Transitions API with gallery morph animations |
-| `/server-islands` | Dynamic + static content mixing demo |
-| `/api-demo` | Server endpoints with interactive API tester |
-| `/content-power` | MDX integration with embedded components |
-| `/performance` | Metrics dashboard with framework comparisons |
+| [/evolution](https://astro-lab-dyu.pages.dev/evolution) | Interactive timeline through web development eras |
+| [/playground](https://astro-lab-dyu.pages.dev/playground) | Islands Architecture with all hydration strategies |
+| [/state-sharing](https://astro-lab-dyu.pages.dev/state-sharing) | React, Vue, and Svelte sharing state via Nano Stores |
+| [/transitions](https://astro-lab-dyu.pages.dev/transitions) | View Transitions API with gallery morph animations |
+| [/server-islands](https://astro-lab-dyu.pages.dev/server-islands) | Dynamic + static content mixing demo |
+| [/api-demo](https://astro-lab-dyu.pages.dev/api-demo) | Server endpoints with interactive API tester |
+| [/content-power](https://astro-lab-dyu.pages.dev/content-power) | MDX integration with embedded components |
+| [/performance](https://astro-lab-dyu.pages.dev/performance) | Metrics dashboard with framework comparisons |
 
 ## Tech Stack
 
